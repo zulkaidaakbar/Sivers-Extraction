@@ -25,7 +25,8 @@ using namespace std;
 
 //global variable & function
 
-bool draw = true;
+bool draw = false;
+bool draw2 = true;
 
 #define PI 3.14159265359
 double dil_factor = /*0.18*/1.0;
@@ -406,9 +407,49 @@ cerr<<"========="<<endl;
        hist_xt[ii]->Draw();
        
     }
-
   }
-  
+
+ if (draw2)
+  {
+    TCanvas *c3[4];
+    char hist_name[100];
+
+    TCanvas *c4[4];
+    char hist_name2[100];
+    for (int ii=0; ii<4; ii++)
+     {
+       c3[ii] = new TCanvas();
+       c3[ii]->SetGrid();
+       c3[ii]->cd();
+
+       sprintf(hist_name,"#phi_{s} distribution bin-xt = %i; #phi_{s}; N",ii+1);
+       hist_phi_s[ii]->SetTitle(hist_name);
+       hist_phi_s[ii]->SetLineColor(kRed);
+       hist_phi_s[ii]->SetMarkerColor(kRed);
+       hist_phi_s[ii]->SetMarkerStyle(kFullCircle);
+       hist_phi_s[ii]->SetMinimum(1500);
+       hist_phi_s[ii]->SetMaximum(3500);
+       hist_phi_s[ii]->SetStats(0);
+       hist_phi_s[ii]->Draw("E1");
+
+       c4[ii] = new TCanvas();
+       c4[ii]->SetGrid();
+       c4[ii]->cd();
+
+       sprintf(hist_name2,"#phi distribution bin-xt = %i; #phi; N",ii+1);
+       hist_phi[ii]->SetTitle(hist_name2);
+       hist_phi[ii]->SetLineColor(kRed);
+       hist_phi[ii]->SetMarkerColor(kRed);
+       hist_phi[ii]->SetMarkerStyle(kFullCircle);
+       hist_phi[ii]->SetMinimum(1500);
+       hist_phi[ii]->SetMaximum(3500);
+       hist_phi[ii]->SetStats(0);
+       hist_phi[ii]->Draw("E1");
+       
+    }
+
+  }  
+
 }
 
 void fcn(Int_t &npar, Double_t *gin, Double_t &f, Double_t par[], Int_t iflag)
