@@ -25,8 +25,8 @@ using namespace std;
 
 //global variable & function
 
-bool draw = false;
-bool draw2 = true;
+bool draw = true;
+bool draw2 = false;
 
 #define PI 3.14159265359
 double dil_factor = /*0.18*/1.0;
@@ -192,7 +192,7 @@ for (int i=0; i<4; i++)
        TF2 *fit_f = new TF2("fit_f",fit_func,-1*PI,PI,-1*PI,PI,npar);
        fit_f->SetParameters(params);
        fit_f->FixParameter(4,N[ii]);
-       hist_xt[ii]->Fit("fit_f");
+       hist_xt[ii]->Fit("fit_f","0");
        
        for (int k=0; k<4; k++)
         {
@@ -404,7 +404,7 @@ cerr<<"========="<<endl;
        
        sprintf(dist_name,"Event distribution bin-xt = %i; #phi_{s}; #phi",ii+1);
        hist_xt[ii]->SetTitle(dist_name);
-       hist_xt[ii]->Draw();
+       hist_xt[ii]->Draw("COLZ");
        
     }
   }
